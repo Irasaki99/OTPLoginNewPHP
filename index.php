@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             $mail->Port = 465;
             $mail->SMTPSecure = 'ssl';
             $mail->isHTML(true);
-            $mail->setFrom('irfan.ito.99@gmail.com', 'Online Examination System');//Sender's Email & Name
+            $mail->setFrom('irfan.ito.99@gmail.com', 'One Time Password');//Sender's Email & Name
             $mail->addAddress($email); //Receiver's Email and Name
             $mail->Subject = $subject;
             $mail->Body = $message;
@@ -110,14 +110,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <style type="text/css">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+<!--<style type="text/css">
         #container{
-            margin-left: 400px;
-            border: 1px solid black;
+            
+            border: 1px solid blue;
+            border-radius: 10px; /* Make border edges round with a radius of 10px */
             width: 440px;
             padding: 20px;
-            margin-top: 40px;
+            margin: auto;
         }
         input[type=text],input[type=password]{
             width: 300px;
@@ -155,17 +158,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             cursor: pointer;
             border: 1px solid purple;
         }
-    </style>
+    </style>-->
 </head>
 <body>
-    <div id="container">
+    <div class="container">
         <form method="post" action="index.php">
-            <label for="email">Email</label><br>
-            <input type="text" name="email" placeholder="Enter Your Email" required><br><br>
-            <label for="password">Password:</label><br>
-            <input type="password" name="password" placeholder="Enter Your Password" required><br><br>
-            <input type="submit" name="login" value="Login"><br><br>
+            <label for="email">Email</label>
+            <div class="form-group">
+            <input class="form-control" type="text" name="email" placeholder="Enter Your Email" required>
+            </div>
+            <label for="password">Password:</label>
+            <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Enter Your Password" required>
+            </div>
+            <div class="form-btn">
+            <input class="btn btn-primary" type="submit" name="login" value="Login">
+            </div> 
+            <div class="col-auto">
             <label>Don't have an account? </label><a href="registration.php">Sign Up</a>
+            </div>
         </form>
     </div>
 </body>

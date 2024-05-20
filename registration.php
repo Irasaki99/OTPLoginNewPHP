@@ -11,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $repeat_password = $_POST['repeat_password'];
 
     // Password policy: mixed characters and minimum length of 8 characters
     if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/", $password)) {
@@ -23,6 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $result_check_email = mysqli_query($conn, $sql_check_email);
     if (mysqli_num_rows($result_check_email) > 0) {
         echo "<script> alert('This email is already registered.'); window.history.back(); </script>";
+        exit();
+    }
+
+    // Check if passwords match
+    if ($password !== $repeat_password) {
+        echo "<script> alert('Passwords do not match.'); window.history.back(); </script>";
         exit();
     }
 
@@ -44,21 +51,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
 }
 ?>
 
-?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <style type="text/css">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <!--<style type="text/css">
         #container{
-            border: 1px solid black;
+            border: 1px solid blue; /* Change border color to blue */
+            border-radius: 10px; /* Make border edges round with a radius of 10px */
             width: 450px;
             padding: 20px;
-            margin-left: 400px;
-            margin-top: 50px;
+            margin: auto;
         }
         form{
             margin-left: 50px;
@@ -86,6 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
             width: 70px;
             background-color: blue;
             border: 1px solid blue;
+            border-radius: 10px; /* Make border edges round with a radius of 10px */
             color: white;
             font-weight: bold;
             padding: 7px;
@@ -95,21 +105,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
             background-color: purple;
             cursor: pointer;
             border: 1px solid purple;
+            border-radius: 10px; /* Make border edges round with a radius of 10px */
         }
-    </style>
+    </style>-->
 </head>
 <body>
-    <div id="container">
+    <div class="container">
         <form method="post" action="registration.php">
-            <label for="username">Username:</label><br>
-            <input type="text" name="username" placeholder="Enter Username" required><br><br>
-
-            <label for="email">Email:</label><br>
-            <input type="text" name="email" placeholder="Enter Your Email" required><br><br>
-
-            <label for="password">Password:</label><br>
-            <input type="password" name="password" placeholder="Enter Password" required><br><br>
-            <input type="submit" name="register" value="Register"><br><br>
+            <label for="username">Username:</label>
+            <div class="form-group">
+            <input type="text" name="username" placeholder="Enter Username" class="form-control" required>
+            </div>
+            <label for="email">Email:</label>
+            <div class="form-group">
+            <input type="text" name="email" placeholder="Enter Your Email" class="form-control" required>
+            </div>
+            <label for="password">Password:</label>
+            <div class="form-group">
+            <input type="password" name="password" placeholder="Enter Password" class="form-control" required>
+            </div>
+            <label for="repeat_password">Repeat Password</lable>
+            <div class="form-group">
+            <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password" required>
+            </div>
+            <div class="form-btn">
+            <input type="submit" name="register" value="Register" class="btn btn-primary"><br><br>
+            </div>
             <label>Already have an account? </label><a href="index.php">Login</a>
         </form>
     </div>

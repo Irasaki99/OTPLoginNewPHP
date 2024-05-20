@@ -47,13 +47,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <style type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <!--<style type="text/css">
         #container{
-            border: 1px solid black;
+            border: 1px solid blue;
             width: 400px;
-            margin-left: 400px;
-            margin-top: 50px;
-            height: 330px;
+            margin: auto;
         }
         form{
             margin-left: 50px;
@@ -71,8 +72,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         }
         button{
-            background-color: orange;
-            border: 1px solid orange;
+            background-color: blue;
+            border: 1px solid blue;
             width: 100px;
             padding: 9px;
             margin-left: 100px;
@@ -81,16 +82,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             cursor: pointer;
             opacity: .9;
         }
-    </style>
+    </style>-->
 </head>
 <body>
-    <div id="container">
+    <div class="container">
         <h1>Two-Step Verification</h1>
         <p>Enter the 6 Digit OTP Code that has been sent <br> to your email address: <?php echo $_SESSION['email']; ?></p>
         <form method="post" action="otp_verification.php">
             <label style="font-weight: bold; font-size: 18px;" for="otp">Enter OTP Code:</label><br>
-            <input type="number" name="otp" pattern="\d{6}" placeholder="Six-Digit OTP" required><br><br>
-            <button type="submit">Verify OTP</button>
+            <div class="form-group">
+                <input type="number" name="otp" pattern="\d{6}" placeholder="Six-Digit OTP" required class="form-control"><br><br>
+            </div>
+            <div class="form-btn">
+            <button type="submit" class="btn btn-primary">Verify OTP</button>
+            </div>
         </form>
     </div>
 </body>
